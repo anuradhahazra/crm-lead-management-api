@@ -1,8 +1,8 @@
-# 🚀 CRM Lead Management API
+# Project Name: Customer Relationship Management(CRM) Lead Management API
 
 A modern, ES6-based REST API for managing customer enquiries and leads. Built with Express, SQLite, and JWT authentication. Perfect for handling lead generation, assignment, and tracking in a CRM workflow.
 
-## ✨ What's Inside
+## What's Inside
 
 This API handles the core workflow of a lead management system:
 
@@ -13,7 +13,7 @@ This API handles the core workflow of a lead management system:
 - **Input Validation** - Robust validation on all endpoints
 - **Error Handling** - Clean, consistent error responses
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 Built with modern JavaScript (ES6 modules) and battle-tested libraries:
 
@@ -24,7 +24,7 @@ Built with modern JavaScript (ES6 modules) and battle-tested libraries:
 - **express-validator** - Request validation middleware
 - **express-rate-limit** - Protection against abuse
 
-## 🏃‍♂️ Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -85,7 +85,7 @@ curl http://localhost:4000/api/test
 
 You should get back: `{"message":"Server running successfully"}`
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Authentication
 
@@ -262,7 +262,7 @@ crm-lead-management-api/
 
 **Note:** This project uses ES6 modules (`import`/`export`), so all file imports require the `.js` extension.
 
-## 🗄️ Database Models
+## Database Models
 
 ### User
 Basic user model for authentication:
