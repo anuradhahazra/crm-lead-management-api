@@ -235,29 +235,29 @@ curl -X POST http://localhost:4000/api/enquiries/claim/1 \
 
 ```
 crm-lead-management-api/
-├── server.js                    # Main entry point (ES6 modules)
-├── db/
-│   └── index.js                 # Sequelize database configuration
 ├── src/
+│   ├── index.js              # Main entry point
+│   ├── app.js                # Express setup
+│   ├── config/
+│   │   └── db.js             # Database configuration
 │   ├── controllers/
-│   │   ├── authController.js    # Authentication logic
-│   │   └── enquiryController.js # Enquiry operations
+│   │   ├── authController.js
+│   │   └── enquiryController.js
 │   ├── middleware/
-│   │   ├── auth.js              # JWT verification middleware
-│   │   └── rateLimiter.js       # Rate limiting config
+│   │   ├── auth.js
+│   │   └── rateLimiter.js
 │   ├── models/
-│   │   ├── index.js             # Model exports & associations
-│   │   ├── user.js              # User model
-│   │   └── enquiry.js           # Enquiry model
+│   │   ├── index.js
+│   │   ├── user.js
+│   │   └── enquiry.js
 │   ├── routes/
-│   │   ├── auth.js              # Auth routes
-│   │   └── enquiries.js         # Enquiry routes
+│   │   ├── authRoutes.js
+│   │   └── enquiryRoutes.js
 │   ├── utils/
-│   │   └── validators.js        # Validation helpers
-│   └── seed.js                  # Database seeding script
-├── .env.example                 # Environment variables template
-├── database.sqlite             # SQLite database (auto-created)
-└── package.json
+│   │   └── validators.js
+│   └── seed.js
+├── package.json
+└── README.md
 ```
 
 **Note:** This project uses ES6 modules (`import`/`export`), so all file imports require the `.js` extension.
@@ -306,60 +306,4 @@ The API follows RESTful conventions and returns appropriate HTTP status codes:
 
 Error responses always include an `error` field with a descriptive message. In development mode, the error handler also returns the error message for debugging.
 
-## 💻 Development Tips
-
-### Database Sync
-
-For development, you can sync models with the database using:
-
-```javascript
-await sequelize.sync({ alter: true });
-```
-
-**⚠️ Warning:** Don't use `sync()` in production! Use proper migrations instead (Sequelize CLI).
-
-### Available Scripts
-
-- `npm start` - Run the production server
-- `npm run dev` - Run with nodemon (auto-reload)
-- `npm run seed` - Populate database with sample data
-
-### Environment Variables
-
-| Variable | What It Does | Default |
-|----------|--------------|---------|
-| `PORT` | Server port | `4000` |
-| `JWT_SECRET` | Secret for signing JWT tokens | **Required** |
-| `NODE_ENV` | Environment mode | `development` |
-
-## 🤝 Contributing
-
-Found a bug? Have a feature idea? Contributions are welcome!
-
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-ISC License - feel free to use this for your projects!
-
-## 🐛 Troubleshooting
-
-**Server won't start?**
-- Check that port 4000 isn't already in use
-- Make sure your `.env` file exists and has `JWT_SECRET` set
-
-**Database errors?**
-- Delete `database.sqlite` and let it recreate on next run
-- Run `npm run seed` to repopulate sample data
-
-**Import errors?**
-- Make sure you're using Node.js v14+ (ES modules support)
-- Check that all imports include the `.js` extension
-
----
-
-**Built with ❤️ using ES6 modules and modern JavaScript best practices.**
+**Built using ES6 modules and modern JavaScript best practices.**
