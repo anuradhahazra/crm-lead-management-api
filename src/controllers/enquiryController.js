@@ -4,7 +4,7 @@ import { Enquiry } from '../models/index.js';
  * Create a public enquiry (unclaimed)
  * Inserts new enquiry with claimed_by = null
  */
-const createPublicEnquiry = async (req, res) => {
+export const createPublicEnquiry = async (req, res) => {
   try {
     const { name, email, phone, course_interest, message } = req.body;
 
@@ -18,7 +18,9 @@ const createPublicEnquiry = async (req, res) => {
       claimed_by: null,
     });
 
-    res.status(201).json(enquiry);
+    res.status(201).json({
+      message: 'Enquiry details submitted successfully.'
+    });
   } catch (error) {
     console.error('Create enquiry error:', error);
     res.status(500).json({ error: 'Failed to create enquiry' });
@@ -30,7 +32,7 @@ const createPublicEnquiry = async (req, res) => {
  * Returns enquiries where claimed_by is null, ordered by newest first
  * Supports query params: ?page=1&limit=20
  */
-const getPublicEnquiries = async (req, res) => {
+export const getPublicEnquiries = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 20;
@@ -65,14 +67,14 @@ const getPublicEnquiries = async (req, res) => {
  * Get enquiries claimed by the current user
  * Returns enquiries where claimed_by matches the authenticated user's id
  */
-const getMyEnquiries = async (req, res) => {
+export const getMyEnquiries = async (req, res) => {
   try {
     const enquiries = await Enquiry.findAll({
       where: { claimed_by: req.user.id },
       order: [['createdAt', 'DESC']],
     });
 
-    res.json(enquiries);
+    res.json({ data: enquiries });
   } catch (error) {
     console.error('Get my enquiries error:', error);
     res.status(500).json({ error: 'Failed to fetch your enquiries' });
@@ -83,7 +85,7 @@ const getMyEnquiries = async (req, res) => {
  * Claim an enquiry (atomic operation)
  * Updates enquiry with user's id only if it's currently unclaimed
  */
-const claimEnquiry = async (req, res) => {
+export const claimEnquiry = async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.user.id;
@@ -130,11 +132,3 @@ const claimEnquiry = async (req, res) => {
     res.status(500).json({ error: 'Failed to claim enquiry' });
   }
 };
-
-export {
-  createPublicEnquiry,
-  getPublicEnquiries,
-  getMyEnquiries,
-  claimEnquiry,
-};
-
